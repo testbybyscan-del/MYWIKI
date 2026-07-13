@@ -1,0 +1,14 @@
+~/dev/docker-containers/wiki/
+├── .env                     # переменные окружения
+├── docker-compose.yml
+├── Dockerfile
+├── .dockerignore
+├── index.php
+├── load_file.php
+├── import.php
+├── init-db.sql
+├── script.js
+├── styles.css
+├── webhook.php (опционально)
+├── pages/    ( страницы )
+└── pg_data/  ( создаётся при запуске )

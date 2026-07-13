@@ -1,0 +1,6 @@
+pg_data/
+wiki_debug.log
+search_index.json
+*.bak
+.git/
+.gitignore

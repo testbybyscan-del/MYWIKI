@@ -1,0 +1,18 @@
+# Игнорируем .env файлы (кроме примера)
+.env
+.env.local
+.env.*.local
+
+# Тома БД
+pg_data/
+
+# Логи
+*.log
+wiki_debug.log
+
+# Файлы IDE
+.vscode/
+.idea/
+
+# Страницы
+pages/

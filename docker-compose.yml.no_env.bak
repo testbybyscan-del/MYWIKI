@@ -1,0 +1,59 @@
+services:
+  # API сервис (прокси) — оставляем без изменений
+  api:
+    image: python:3.9-slim
+    container_name: pesah_api
+    command: /bin/bash -c "echo 'Hello from API service on port 5000!' > index.html && python3 -m http.server 5000"
+    ports:
+      - "53000:5000"
+    restart: unless-stopped
+
+  # APP сервис (тестовый) — оставляем без изменений
+  app:
+    image: python:3.9-slim
+    container_name: pesah_app
+    command: /bin/bash -c "echo 'Hello from APP service on port 6000!' > index.html && python3 -m http.server 6000"
+    ports:
+      - "53001:6000"
+    restart: unless-stopped
+
+  # PostgreSQL база данных
+  db:
+    image: postgres:15
+    container_name: wiki_db
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_USER: wiki_user
+      POSTGRES_PASSWORD: secure_password_change_me
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql  # автоматическое создание таблиц
+   # ports:
+   #  - "5432:5432"   # можно убрать, если не нужно подключаться с хоста
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wiki_user -d wiki"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # WIKI сервис (основной)
+  wiki:
+    build: .
+    container_name: wiki-pesah
+    ports:
+      - "53002:80"
+    volumes:
+      # Монтируем всю текущую директорию (кроме pg_data) для разработки
+      - .:/var/www/html
+      # Исключаем pg_data из монтирования, чтобы не затирать БД
+      - /var/www/html/pg_data
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: wiki
+      DB_USER: wiki_user
+      DB_PASSWORD: secure_password_change_me
+    restart: unless-stopped
