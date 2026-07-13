@@ -1,14 +1,22 @@
-~/dev/docker-containers/wiki/
-├── .env                     # переменные окружения
 ├── docker-compose.yml
 ├── Dockerfile
 ├── .dockerignore
-├── index.php
-├── load_file.php
+├── .gitignore
 ├── import.php
+├── index.php
 ├── init-db.sql
+├── load_file.php
+├── pages/
+│   ├── .gitkeep                         # заглушка, чтобы папка попала в Git
+│   ├── 0001._readme.md                  # страницы в формате `_tag._tag._tag.md`
+│   ├── 0002._example._docker._php.md    # по этим тегам происходит поиск ( без `_`)
+│   :
+│   :                                    # страницы отправляются вебхуком из репо, см README.md
+├── README.md
+├── Parsedown.php
 ├── script.js
+├── structure
 ├── styles.css
-├── webhook.php (опционально)
-├── pages/    ( страницы )
-└── pg_data/  ( создаётся при запуске )
+├── webhook.php
+└── pg_data/                             # создаётся автоматически при запуске (том БД)
+    └── (файлы данных PostgreSQL)
