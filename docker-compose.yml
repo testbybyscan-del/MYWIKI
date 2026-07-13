@@ -1,22 +1,4 @@
 services:
-  # API сервис (прокси) – порт из .env
-  api:
-    image: python:3.9-slim
-    container_name: pesah_api
-    command: /bin/bash -c "echo 'Hello from API service on port 5000!' > index.html && python3 -m http.server 5000"
-    ports:
-      - "${API_PORT:-53000}:5000"
-    restart: unless-stopped
-
-  # APP сервис (тестовый) – порт из .env
-  app:
-    image: python:3.9-slim
-    container_name: pesah_app
-    command: /bin/bash -c "echo 'Hello from APP service on port 6000!' > index.html && python3 -m http.server 6000"
-    ports:
-      - "${APP_PORT:-53001}:6000"
-    restart: unless-stopped
-
   # PostgreSQL база данных
   db:
     image: postgres:15
@@ -28,7 +10,6 @@ services:
     volumes:
       - ./pg_data:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
-    # ports: не публикуем наружу
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
@@ -44,7 +25,6 @@ services:
       - "${WIKI_PORT:-53002}:80"
     volumes:
       - .:/var/www/html
-      - /var/www/html/pg_data   # исключаем том pg_data из монтирования
     depends_on:
       db:
         condition: service_healthy

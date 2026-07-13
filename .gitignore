@@ -15,4 +15,7 @@ wiki_debug.log
 .idea/
 
 # Страницы
-pages/
+#pages/
+# Игнорируем всё внутри pages, кроме .gitkeep
+pages/*
+!pages/.gitkeep
