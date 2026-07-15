@@ -300,6 +300,8 @@ MYWIKI/
 
 [Parsedown (c) Emanuil Rusev – лицензия MIT (встроена в код)](https://github.com/erusev/parsedown)
 
+Отдельное спасибо [hackspace_it](https://t.me/hackspace_it) за полезные ссылки !
+
 ---
 
 ## Лицензия и авторство
@@ -314,4 +316,4 @@ MYWIKI/
 
 ---
 
-\*\*Приятного использования!\*\* 🚀
+**Приятного использования!** 🚀
