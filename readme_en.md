@@ -8,7 +8,7 @@
 
 > **A lightweight knowledge base system** – store, search and share your Markdown notes with full‑text search, Docker‑ready, and self‑hosted.
 
-> **Легковесная база знаний** – храните, ищите и публикуйте заметки в Markdown с полнотекстовым поиском, готовый к развёртыванию в Docker.
+> **Легковесная база знаний** – храните, ищите и публикуйте заметки в Markdown с полнотекстовым поиском, готовая к развёртыванию в Docker.
 
 ---
 
