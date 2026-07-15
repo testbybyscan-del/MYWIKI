@@ -80,7 +80,7 @@ DB_USER=wiki_user
 DB_PASSWORD=secure_password_change_me
 ```
 
-Обратите внимание: `DB\_HOST` должен указывать на имя сервиса `db` (как в docker-compose.yml).
+Обратите внимание: `DB_HOST` должен указывать на имя сервиса `db` (как в docker-compose.yml).
 
 ### 3. Запуск контейнеров
 
@@ -123,7 +123,7 @@ docker-compose up -d
 ### Запуск импорта
 
 ```bash
-docker exec -it wiki-pesah php import.php
+docker exec -it <ИМЯ КОНТЕЙНЕРА> php import.php
 ```
 Флаги:
 
@@ -149,9 +149,9 @@ docker exec -it wiki-pesah php import.php
 
 ```bash
 # Из контейнера:
-docker exec -it wiki-pesah php sanitizer.php /var/www/html/pages
+docker exec -it <ИМЯ КОНТЕЙНЕРА> php sanitizer.php /var/www/html/pages
 # Или с указанием пути по умолчанию (если рабочий каталог совпадает):
-docker exec -it wiki-pesah php sanitizer.php
+docker exec -it <ИМЯ КОНТЕЙНЕРА> php sanitizer.php
 ```
 
 Если путь не передан, скрипт обрабатывает `pages/` в текущей директории.
