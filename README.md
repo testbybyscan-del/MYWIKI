@@ -70,14 +70,14 @@ cp .env.example .env
 Пример содержимого `.env`:
 
 ```
-POSTGRES\_DB=wiki
-POSTGRES\_USER=wiki\_user
-POSTGRES\_PASSWORD=secure\_password\_change\_me
-WIKI\_PORT=<ВАШ ПОРТ>
-DB\_HOST=db
-DB\_NAME=wiki
-DB\_USER=wiki\_user
-DB\_PASSWORD=secure\_password\_change\_me
+POSTGRES_DB=wiki
+POSTGRES_USER=wiki_user
+POSTGRES_PASSWORD=secure_password_change_me
+WIKI_PORT=<ВАШ ПОРТ>
+DB_HOST=db
+DB_NAME=wiki
+DB_USER=wiki_user
+DB_PASSWORD=secure_password_change_me
 ```
 
 Обратите внимание: `DB\_HOST` должен указывать на имя сервиса `db` (как в docker-compose.yml).
@@ -101,9 +101,7 @@ docker-compose up -d
 Файлы должны именоваться по шаблону:
 
 ```
-
 [номер]._[язык]._[тема].md
-
 ```
 
 **Примеры:**
