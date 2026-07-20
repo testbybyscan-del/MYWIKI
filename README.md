@@ -13,10 +13,22 @@
 
 **Легковесная, быстрая и масштабируемая вики-система для команд и одиночных разработчиков.**
 
-> **Автор:** @Bybyscan
-> **[Parsedown & ParsedownExtra (c) Emanuil Rusev](https://github.com/erusev/parsedown)**
-> **[ParsedownExtra на Packagist](https://packagist.org/packages/erusev/parsedown-extra)**
-> **Репозиторий:** [github.com/testbybyscan-del/MYWIKI](https://github.com/testbybyscan-del/MYWIKI)
+---
+
+## О проекте
+
+Проект **MYWIKI** разработан @Bybyscan как легковесная вики-система для технической документации и баз знаний.
+В основе рендеринга Markdown лежат библиотеки **Parsedown** и **ParsedownExtra**, созданные Emanuil Rusev (лицензия MIT).
+ParsedownExtra добавляет поддержку таблиц, футнотов и других расширений Markdown Extra, что делает контент более структурированным и удобным для восприятия.
+
+Подробнее о библиотеках:
+
+- [Parsedown на GitHub](https://github.com/erusev/parsedown)
+- [ParsedownExtra на GitHub](https://github.com/erusev/parsedown-extra)
+- [ParsedownExtra на Packagist](https://packagist.org/packages/erusev/parsedown-extra)
+
+Исходный код MYWIKI доступен в репозитории:
+[github.com/testbybyscan-del/MYWIKI](https://github.com/testbybyscan-del/MYWIKI)
 
 ---
 
@@ -204,7 +216,11 @@ MIT — свободно распространяется, модифициру�
 
 ---
 
-**🌟 Звездоните репозиторий, если проект вам полезен!**
+**Поставьте 🌟 если проект вам полезен!**
 
 🚀 **Попробуйте MYWIKI сегодня — ваша база знаний станет простой и удобной.**
+
+```
+
+```
 
