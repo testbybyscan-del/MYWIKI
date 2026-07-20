@@ -1,36 +1,64 @@
+version: '3.8'
+
 services:
-  # PostgreSQL база данных
+  # ========== PostgreSQL ==========
   db:
     image: postgres:15
     container_name: wiki_db
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
-      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Переменные загружаются из .env, но для надёжности дублируем
+      POSTGRES_DB: ${POSTGRES_DB:-wiki}
+      POSTGRES_USER: ${POSTGRES_USER:-wiki_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_change_me}
+    volumes:
+      # Именованный том – больше никаких проблем с правами в WSL
+      - pg_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      # Явные имена, чтобы healthcheck работал даже если переменные не подставятся
+      test: ["CMD-SHELL", "pg_isready -U wiki_user -d wiki"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
+    networks:
+      - wiki_network
 
-  # WIKI сервис (основной)
+  # ========== WIKI ==========
   wiki:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: wiki-pesah
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DB_HOST: ${DB_HOST:-db}
+      DB_NAME: ${DB_NAME:-wiki}
+      DB_USER: ${DB_USER:-wiki_user}
+      DB_PASSWORD: ${DB_PASSWORD:-secure_password_change_me}
     ports:
       - "${WIKI_PORT:-53002}:80"
     volumes:
+      # Монтируем весь проект для разработки (код сразу обновляется)
       - .:/var/www/html
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-    restart: unless-stopped
+    networks:
+      - wiki_network
+
+# ========== Объявление томов и сетей ==========
+volumes:
+  pg_data:
+    # Том не удаляется при docker-compose down, данные сохраняются
+    name: mywiki_pg_data
+
+networks:
+  wiki_network:
+    driver: bridge
+    name: mywiki_network
